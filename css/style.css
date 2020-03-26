@@ -1,0 +1,22 @@
+.card-deck .card{
+	max-height: 200px;
+	flex: 1 1 50%;
+} 
+.card-body{
+	padding: .5rem;
+	align-items:center;
+}
+.card-footer{
+	padding: .5rem;
+}
+@media screen and (min-width: 768px){
+	.card-deck{
+		display: grid;
+		grid-template-columns: 50% 50%;
+	}	
+}
+
+/* Slider */
+.img{
+	height: 500px;
+}
