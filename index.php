@@ -60,10 +60,10 @@ class Da_Slider
 
 	// Files for the site
 	public function my_scripts(){
-		wp_enqueue_script('jQuery');
-		wp_enqueue_script('media_files', plugins_url('js/media.js', __FILE__));
-		wp_enqueue_style('bootstrap_css', plugins_url('css/bootstrap.min.css', __FILE__));
-		wp_enqueue_style('my_styles', plugins_url('css/style.css', __FILE__));
+		// wp_enqueue_script('jQuery');
+		wp_enqueue_style('my_styles', plugins_url('css/main.css', __FILE__));
+		wp_enqueue_script('media_files', plugins_url('js/main.js', __FILE__), array(), '1.2.0', true);
+		// wp_enqueue_style('bootstrap_css', plugins_url('css/bootstrap.min.css', __FILE__));
 	}
 
 	// VIEW
@@ -163,7 +163,7 @@ class Da_Slider
 	public function code(){
 		$slider = $this->get();
 
-		include 'code.php';
+		include 'newcode.php';
 	}
 }
 
