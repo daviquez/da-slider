@@ -163,7 +163,7 @@ class Da_Slider
 	public function code(){
 		$slider = $this->get();
 
-		include 'newcode.php';
+		include 'slider.php';
 	}
 }
 
