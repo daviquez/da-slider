@@ -1,0 +1,112 @@
+.da-slide {display: none}
+.da-slider-container{
+    position: relative;
+    max-height: 350px;
+    overflow: hidden;
+}
+.da-slide 
+img {
+    vertical-align: middle;
+}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+.da-slide-text{
+    position: absolute;    
+    width: 100%;
+    bottom: 3%;
+    color: white;
+    text-align: center;
+}
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: rgb(192, 192, 192);
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+}
+
+/* The dots/bullets/indicators */
+.da-dots ul{
+    position: absolute;
+    bottom: 1%;
+    display: flex;
+    padding: 0;
+    margin-bottom: 0;
+    justify-content: center;
+    width: 100%;
+    gap: 17px;
+    list-style: none;
+}
+.da-dots li{
+    box-sizing: content-box;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    text-indent: -999px;
+    cursor: pointer;
+    background-clip: padding-box;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    opacity: .5;
+    transition: opacity .6s ease;
+}
+.da-dots li::after{
+    content: '';
+    height: 3px;
+    width: 35px;
+    display: block;
+    background: white;
+    border-radius: 5px;
+}
+
+.da-dots .active, .dot:hover {
+  background-color: white;
+  opacity: 1;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}

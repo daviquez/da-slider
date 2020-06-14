@@ -1,24 +1,35 @@
 <?php 
 /**
  * Plugin Name: Da Slider
- * Author: David Vîquez
+ * Author: David
  * Description: Bootstrap Carousel Slider
  * Version: 0.1
  */
 
+ 
+if( !defined('WPINC') ){
+    die;
+}
 
 class Da_Slider
 {
 	public function __construct()
 	{
+		// Add to menu
 		add_action('admin_menu', array($this, 'add_menu'));
+
+		// Add scripts to the dashboard
 		add_action('admin_enqueue_scripts', array($this, 'addons'));
+		// Add scripts to the site
 		add_action('wp_enqueue_scripts', array($this, 'my_scripts'));
 		
+		// When activated. Call create_table, and insert data method
 		register_activation_hook( __FILE__, array($this, 'create_table'));
 		register_activation_hook( __FILE__, array($this, 'insert_data'));
+		// When deactivated. Delete data from the data base
 		register_deactivation_hook( __FILE__, array($this, 'delete_table'));
 
+		// CREATE. UPDATE and DELETE
 		add_action('admin_post_create_slide', array($this, 'post'));
 		add_action('admin_post_update_slide', array($this, 'put'));
 		add_action('admin_post_delete_slide', array($this, 'delete'));
@@ -37,6 +48,7 @@ class Da_Slider
 		);
 	}
 
+	// Files for the plugin
 	public function addons(){
 		wp_enqueue_media('media');
 		wp_enqueue_script('jQuery');
@@ -46,24 +58,27 @@ class Da_Slider
 		wp_enqueue_style('my_styles', plugins_url('css/style.css', __FILE__));
 	}
 
+	// Files for the site
 	public function my_scripts(){
-		wp_enqueue_script('jQuery');
-		wp_enqueue_script('media_files', plugins_url('js/media.js', __FILE__));
-		wp_enqueue_style('bootstrap_css', plugins_url('css/bootstrap.min.css', __FILE__));
-		wp_enqueue_style('my_styles', plugins_url('css/style.css', __FILE__));
+		// wp_enqueue_script('jQuery');
+		wp_enqueue_style('my_styles', plugins_url('css/main.css', __FILE__));
+		wp_enqueue_script('media_files', plugins_url('js/main.js', __FILE__), array(), '1.2.0', true);
+		// wp_enqueue_style('bootstrap_css', plugins_url('css/bootstrap.min.css', __FILE__));
 	}
 
+	// VIEW
 	public function view(){
 		$slider = $this->get();
 
 		require 'view.php';
 	}
 
+	// When activated
 	public function create_table(){
 		global $wpdb;
 		$installed_ver = get_option("jal_db_version");
 
-		$table_name = $wpdb->prefix . 'da_slider';
+		$table_name = $wpdb->prefix . 'da_slider';// -> wp_da_slider
 		$charset_collate = $wpdb->get_charset_collate();
 
 		$sql = "CREATE TABLE $table_name (
@@ -101,12 +116,14 @@ class Da_Slider
     	$wpdb->query("DROP TABLE IF EXISTS $table_name");
 	}
 
+	/* GET */
 	public function get(){
 		global $wpdb;
 
 		return $wpdb->get_results("SELECT * FROM wp_da_slider");
 	}
 
+	/* POST */
 	public function post(){
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'da_slider';
@@ -118,6 +135,7 @@ class Da_Slider
 		wp_redirect(wp_get_referer());
 	}
 
+	/* UPDATE */
 	public function put(){
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'da_slider';
@@ -129,6 +147,7 @@ class Da_Slider
 		wp_redirect(wp_get_referer());
 	}
 
+	/* DELETE */
 	public function delete(){
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'da_slider';
@@ -140,10 +159,11 @@ class Da_Slider
 		wp_redirect(wp_get_referer());
 	}
 
+	/* SITE CODE */
 	public function code(){
 		$slider = $this->get();
 
-		include 'code.php';
+		include 'slider.php';
 	}
 }
 
